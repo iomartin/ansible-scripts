@@ -1,0 +1,23 @@
+- name: Gather Ansible Facts
+  ansible.builtin.gather_facts:
+
+- name: Clone homeshick
+  ansible.builtin.git:
+    repo: git@github.com:andsens/homeshick.git
+    dest: '{{ ansible_user_dir }}/.homesick/repos/homeshick'
+    accept_hostkey: True
+
+- name: Clone homeshick castles
+  ansible.builtin.command:
+    cmd: '{{ ansible_user_dir }}/.homesick/repos/homeshick/bin/homeshick clone --batch --force {{ item }}'
+  with_items:
+    - git@github.com:iomartin/dotfiles.git
+    - git@github.com:iomartin/vimconfig.git
+  register: homeshick
+  failed_when:
+    - homeshick.rc != 0
+    - '"already exists" not in homeshick.stderr'
+
+- name: Link all homeshick castles
+  ansible.builtin.command:
+    cmd: '{{ ansible_user_dir }}/.homesick/repos/homeshick/bin/homeshick link --force'
