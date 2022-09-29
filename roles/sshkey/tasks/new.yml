@@ -1,0 +1,23 @@
+- name: Generate SSH key
+  community.crypto.openssh_keypair:
+    type: '{{ sshkey_type }}'
+    path: '{{ sshkey_path }}'
+
+- block:
+  - name: Copy public key to host
+    ansible.builtin.fetch:
+      src: '{{ sshkey_path }}.pub'
+      dest: /tmp/
+    register: pubkey
+
+  - name: Add key to GitHub
+    delegate_to: localhost
+    ansible.builtin.command:
+      cmd: gh ssh-key add {{ pubkey.dest }} -t {{ sshkey_comment | quote}}
+
+  - name: Delete public key from host
+    delegate_to: localhost
+    ansible.builtin.file:
+      path: '{{ pubkey.dest }}'
+      state: absent
+  when: sshkey_upload_github

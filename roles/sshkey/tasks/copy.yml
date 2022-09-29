@@ -1,0 +1,5 @@
+- name: Copy private key to target
+  ansible.builtin.copy:
+    src: '{{ sshkey_path }}'
+    dest: '{{ ansible_user_dir }}/.ssh/{{ sshkey_path | basename }}'
+    mode: '0600'

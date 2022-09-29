@@ -1,0 +1,10 @@
+- name: Gather Ansible Facts
+  ansible.builtin.gather_facts:
+
+- name: Create new key-pair
+  ansible.builtin.include_tasks: new.yml
+  when: sshkey_create
+
+- name: Copy existing key-pair from host
+  ansible.builtin.include_tasks: copy.yml
+  when: not sshkey_create

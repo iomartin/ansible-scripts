@@ -1,0 +1,15 @@
+# Should we create a new SSH key?
+sshkey_create: False
+
+# Should we copy the new key to GitHub? This is only valid if sshkey_create is True
+sshkey_upload_github: False
+
+# Key type to use if creating a new one
+sshkey_type: ed25519
+
+# If sshkey_create is True, this is the path of the existing key that we will copy
+# If it is False, this is where we will install the new key
+sshkey_path: '{{ ansible_user_dir }}/.ssh/id_{{ sshkey_type }}'
+
+# Comment to add when adding key to GitHub
+sshkey_comment: 'Key created automatically with Ansible for host {{ ansible_hostname | quote}}'
