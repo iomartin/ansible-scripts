@@ -9,7 +9,7 @@ sshkey_type: ed25519
 
 # If sshkey_create is True, this is the path of the existing key that we will copy
 # If it is False, this is where we will install the new key
-sshkey_path: '{{ ansible_user_dir }}/.ssh/id_{{ sshkey_type }}'
+sshkey_path: '~/.ssh/id_{{ sshkey_type }}'
 
 # Comment to add when adding key to GitHub
 sshkey_comment: 'Key created automatically with Ansible for host {{ ansible_hostname | quote}}'
