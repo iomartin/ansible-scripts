@@ -1,0 +1,9 @@
+- name: Setup new machine
+  hosts: vm
+  gather_facts: true
+  vars:
+    sshkey_create: False
+    sshkey_type: rsa
+  roles:
+    - sshkey
+    - dotfiles
