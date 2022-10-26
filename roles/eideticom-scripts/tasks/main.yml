@@ -1,0 +1,10 @@
+- name: Clone eideticom-scripts
+  ansible.builtin.git:
+    repo: git@github.com:Eideticom/eideticom-scripts.git
+    dest: '{{ ansible_user_dir }}/repos/eideticom-scripts/'
+
+- name: Add eideticom-scripts to PATH
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_user_dir }}/.bashrc.{{ ansible_hostname }}'
+    line: 'export PATH=$PATH:{{ ansible_user_dir }}/repos/eideticom-scripts'
+    create: true

@@ -7,4 +7,5 @@
   roles:
     - sshkey
     - dotfiles
+    - eideticom-scripts
     - dmesg
