@@ -1,0 +1,10 @@
+# Requires
+#
+#     ansible-galaxy collection install ansible.posix
+- name: Allow non-root user to read the kernel log
+  ansible.posix.sysctl:
+    name: kernel.dmesg_restrict
+    value: '0'
+    reload: true
+    sysctl_file: /etc/sysctl.d/10-kernel-hardening.conf
+  become: true
