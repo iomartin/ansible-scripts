@@ -6,6 +6,7 @@
     sshkey_type: rsa
   roles:
     - sshkey
+    - pkgs
     - dotfiles
     - eideticom-scripts
     - dmesg
