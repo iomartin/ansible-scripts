@@ -5,6 +5,7 @@
     sshkey_create: False
     sshkey_type: rsa
   roles:
+    - user_config
     - sshkey
     - pkgs
     - dotfiles

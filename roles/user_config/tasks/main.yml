@@ -1,0 +1,14 @@
+- name: Configure user on FreeBSD
+  when: ansible_facts['os_family'] == 'FreeBSD'
+  block:
+  - name: "[FreeBSD] Disable random cookie on login"
+    ansible.builtin.replace:
+      path: '{{ ansible_user_dir }}/.profile'
+      regexp: '^(.*fortune.*)$'
+      replace: '#\1'
+
+  - name: "[FreeBSD] Set bash as shell"
+    ansible.builtin.user:
+      user: '{{ ansible_user }}'
+      shell: /usr/local/bin/bash
+    become: true
