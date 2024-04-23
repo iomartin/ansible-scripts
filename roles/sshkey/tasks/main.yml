@@ -1,6 +1,12 @@
 - name: Gather Ansible Facts
   ansible.builtin.gather_facts:
 
+- name: Create .ssh/ directory
+  ansible.builtin.file:
+    path: '{{ ansible_user_dir }}/.ssh/'
+    state: directory
+    mode: '0700'
+
 - name: Create new key-pair
   ansible.builtin.include_tasks:
     file: new.yml

@@ -21,3 +21,8 @@
 - name: Link all homeshick castles
   ansible.builtin.command:
     cmd: '{{ ansible_user_dir }}/.homesick/repos/homeshick/bin/homeshick link --force'
+
+- name: Delete ./ssh/config
+  ansible.builtin.file:
+    path: '{{ ansible_user_dir }}/.ssh/config'
+    state: absent
