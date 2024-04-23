@@ -7,6 +7,12 @@
       regexp: '^(.*fortune.*)$'
       replace: '#\1'
 
+  - name: "[FreeBSD] Source .bashrc"
+    ansible.builtin.lineinfile:
+      path: '{{ ansible_user_dir }}/.profile'
+      line: 'source ~/.bashrc'
+      insertafter: EOF
+
   - name: "[FreeBSD] Set bash as shell"
     ansible.builtin.user:
       user: '{{ ansible_user }}'
